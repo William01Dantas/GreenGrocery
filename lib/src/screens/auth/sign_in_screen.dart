@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greengrocer/src/screen_routes/app_screens.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/screens/auth/controller/auth_controller.dart';
 import 'package:greengrocer/src/screens/widgets/app_name_widget.dart';
 
 import '../widgets/custom_text_field_widget.dart';
@@ -108,29 +109,43 @@ class SingnInScreen extends StatelessWidget {
                       // Botao Entrar
                       SizedBox(
                         height: 50.0,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              String email = emailController.text;
-                              String password = passwordController.text;
-                              print(
-                                "Todos os campos válidos! Email: $email - Senha: $password",
-                              );
-                            } else {
-                              print("Campos não válidos");
-                            }
+                        child: GetX<AuthController>(
+                          builder: (authController) {
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                              ),
+                              onPressed: authController.isLoading.value
+                                  ? null
+                                  : () {
+                                      FocusScope.of(context).unfocus();
 
-                            //Get.offNamed(ScreensRoutes.baseRoute);
+                                      if (_formKey.currentState!.validate()) {
+                                        String email = emailController.text;
+                                        String password =
+                                            passwordController.text;
+                                        authController.signIn(
+                                          email: email,
+                                          password: password,
+                                        );
+                                      } else {
+                                        print("Campos não válidos");
+                                      }
+
+                                      //Get.offNamed(ScreensRoutes.baseRoute);
+                                    },
+                              child: authController.isLoading.value
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.grey,
+                                    )
+                                  : const Text(
+                                      "Entrar",
+                                      style: TextStyle(fontSize: 18.0),
+                                    ),
+                            );
                           },
-                          child: const Text(
-                            "Entrar",
-                            style: TextStyle(fontSize: 18.0),
-                          ),
                         ),
                       ),
                       // Esqueceu a senha
