@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:greengrocer/src/screens/auth/sign_in_screen.dart';
-import 'package:greengrocer/src/screens/auth/sign_up_screen.dart';
+import 'package:greengrocer/src/screens/auth/view/sign_in_screen.dart';
+import 'package:greengrocer/src/screens/auth/view/sign_up_screen.dart';
 import 'package:greengrocer/src/screens/base/base_screen.dart';
 import 'package:greengrocer/src/screens/splash/splash_screen.dart';
 
@@ -12,7 +12,7 @@ abstract class AppScreens {
     ),
     GetPage(
       name: ScreensRoutes.signInRoute,
-      page: () => SingnInScreen(),
+      page: () => SignInScreen(),
     ),
     GetPage(
       name: ScreensRoutes.signUpRoute,

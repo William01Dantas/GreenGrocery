@@ -5,11 +5,10 @@ import 'package:greengrocer/src/screen_routes/app_screens.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/screens/auth/controller/auth_controller.dart';
 import 'package:greengrocer/src/screens/widgets/app_name_widget.dart';
+import 'package:greengrocer/src/screens/widgets/custom_text_field_widget.dart';
 
-import '../widgets/custom_text_field_widget.dart';
-
-class SingnInScreen extends StatelessWidget {
-  SingnInScreen({Key? key}) : super(key: key);
+class SignInScreen extends StatelessWidget {
+  SignInScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
