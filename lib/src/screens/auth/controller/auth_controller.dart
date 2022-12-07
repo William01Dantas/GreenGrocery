@@ -7,7 +7,6 @@ class AuthController extends GetxController {
   final authRepository = AuthRepository();
 
   Future<void> signIn({required String email, required String password}) async {
-    // onde passa o back-end
     isLoading.value = true;
 
     await authRepository.signIn(email: email, password: password);
